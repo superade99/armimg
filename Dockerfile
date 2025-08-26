@@ -1,11 +1,7 @@
 # Use ARM64 base (works with Graviton)
 FROM --platform=linux/arm64 python:3.12-slim
 
-WORKDIR /app
-
-# Copy agent code
-COPY . .
-UN apt update && apt -y install curl git wget sudo ufw
+RUN apt update && apt -y install curl git wget sudo ufw
 # Copies the trainer code to the docker image.
 COPY trainer /trainer
 # Sets up the entry point to invoke the trainer.
