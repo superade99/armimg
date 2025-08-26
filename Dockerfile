@@ -5,9 +5,7 @@ WORKDIR /app
 
 # Copy agent code
 COPY . .
-
-# Expose AgentCore Runtime default port
-EXPOSE 8080
+UN apt update && apt -y install curl git wget sudo ufw
 # Copies the trainer code to the docker image.
 COPY trainer /trainer
 # Sets up the entry point to invoke the trainer.
