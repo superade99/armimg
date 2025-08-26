@@ -12,6 +12,7 @@ COPY . .
 
 # Expose AgentCore Runtime default port
 EXPOSE 8080
-
-# Start the agent
-CMD ["python", "my_agent.py"]
+# Copies the trainer code to the docker image.
+COPY trainer /trainer
+# Sets up the entry point to invoke the trainer.
+ENTRYPOINT ["python", "-m", "trainer.task"]
