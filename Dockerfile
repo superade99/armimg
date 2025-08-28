@@ -1,7 +1,19 @@
-# Use ARM64 base (works with Graviton)
-FROM --platform=linux/arm64 python:3.12-slim
+# Minimal Ubuntu base image
+FROM public.ecr.aws/ubuntu/ubuntu:22.04
 
-RUN apt update && apt -y install curl git wget sudo ufw
+# Install common tools (wget, curl, etc.)
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+        wget \
+        curl \
+        ca-certificates \
+        python3 \
+        python3-pip && \
+    rm -rf /var/lib/apt/lists/*
+
+# Set working directory
+WORKDIR /workspace
+
 # Copies the trainer code to the docker image.
 COPY trainer /trainer
 # Sets up the entry point to invoke the trainer.
